@@ -1,5 +1,6 @@
 package ephyl.sevlets;
 
+import ephyl.dto.CourseDto;
 import ephyl.model.Course;
 import ephyl.model.Student;
 import ephyl.service.CourseService;
@@ -23,6 +24,7 @@ import static org.mockito.Mockito.verify;
 class CourseServletTest {
     CourseService courseService;
     Course course;
+    CourseDto courseDto;
     CourseServlet servlet;
     final HttpServletRequest request = mock(HttpServletRequest.class);
     final HttpServletResponse response = mock(HttpServletResponse.class);
@@ -33,8 +35,8 @@ class CourseServletTest {
     void init() {
         courseService = mock(CourseService.class);
         servlet = new CourseServlet(courseService);
-
         course = new Course();
+        courseDto = new CourseDto();
 
     }
 
@@ -45,7 +47,7 @@ class CourseServletTest {
         BufferedReader bufferedReader = new BufferedReader(new CharArrayReader(str.toCharArray()));
         when(request.getReader()).thenReturn(bufferedReader);
         when(request.getMethod()).thenReturn("GET");
-        when(courseService.findById(id)).thenReturn(course);
+        when(courseService.findById(id)).thenReturn(courseDto);
         when(response.getWriter()).thenReturn(printWriter);
 
         servlet.doGet(request, response);

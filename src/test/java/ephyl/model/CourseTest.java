@@ -24,7 +24,7 @@ class CourseTest {
 
     @Test
     void setStudents() {
-        List<StudentDto> studentList = Mockito.mock(List.class);
+        List<Student> studentList = Mockito.mock(List.class);
         when(studentList.size()).thenReturn(2);
         course.setStudents(studentList);
         courseWithParams.setStudents(studentList);

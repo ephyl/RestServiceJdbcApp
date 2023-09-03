@@ -1,7 +1,5 @@
 package ephyl.model;
 
-import ephyl.dto.CourseDto;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -11,7 +9,7 @@ public class Student {
     private int age;
     private Gender gender;
 
-    private List<CourseDto> coursesDto;
+    private List<Course> courseList;
 
     public Student() {
     }
@@ -22,12 +20,12 @@ public class Student {
         this.gender = gender;
     }
 
-    public List<CourseDto> getCoursesDto() {
-        return coursesDto;
+    public List<Course> getCourseList() {
+        return courseList;
     }
 
-    public void setCoursesDto(List<CourseDto> coursesDto) {
-        this.coursesDto = coursesDto;
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
     }
 
     public int getId() {

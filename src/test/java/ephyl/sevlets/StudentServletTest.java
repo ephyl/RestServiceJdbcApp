@@ -23,6 +23,7 @@ import static org.mockito.Mockito.verify;
 class StudentServletTest {
     StudentService studentService;
     Student student;
+    StudentDto studentDto;
     StudentServlet servlet;
     final HttpServletRequest request = mock(HttpServletRequest.class);
     final HttpServletResponse response = mock(HttpServletResponse.class);
@@ -35,6 +36,7 @@ class StudentServletTest {
         servlet = new StudentServlet(studentService);
 
         student = new Student();
+        studentDto = new StudentDto();
 
     }
 
@@ -46,7 +48,7 @@ class StudentServletTest {
         BufferedReader bufferedReader = new BufferedReader(new CharArrayReader(str.toCharArray()));
         when(request.getReader()).thenReturn(bufferedReader);
         when(request.getMethod()).thenReturn("GET");
-        when(studentService.findById(id)).thenReturn(student);
+        when(studentService.findById(id)).thenReturn(studentDto);
         when(response.getWriter()).thenReturn(printWriter);
 
         servlet.doGet(request, response);

@@ -50,7 +50,7 @@ class CourseManagerDaoJdbcTest {
         int[] courseId = {3};
         courseManagerDaoJdbc.unAssignCourses(studentId, courseId);
 
-        assertEquals(1, studentDaoJdbc.findById(studentId).get().getCoursesDto().size());
+        assertEquals(1, studentDaoJdbc.findById(studentId).get().getCourseList().size());
     }
 
 }

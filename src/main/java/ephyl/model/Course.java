@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Course {
     private int id;
     private String name;
-    private List<StudentDto> students;
+    private List<Student> students;
 
     private int teacher_id;
 
@@ -24,11 +24,11 @@ public class Course {
         this.teacher_id = teacher_id;
     }
 
-    public List<StudentDto> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<StudentDto> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
