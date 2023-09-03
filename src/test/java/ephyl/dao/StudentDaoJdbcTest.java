@@ -79,8 +79,8 @@ public class StudentDaoJdbcTest {
         int studentId = 1;
         Optional<Student> student = studentDaoJdbc.findById(studentId);
         assertTrue(student.isPresent());
-        assertEquals(2, student.get().getCoursesDto().size());
-        assertEquals("Java", student.get().getCoursesDto().get(0).getName());
+        assertEquals(2, student.get().getCourseList().size());
+        assertEquals("Java", student.get().getCourseList().get(0).getName());
     }
 
     @Test

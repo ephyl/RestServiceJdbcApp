@@ -37,8 +37,8 @@ public class StudentServlet extends HttpServlet {
         try {
             studentToBeFindById = convertFromJson(req, studentToBeFindById).orElseThrow(StudentNotFoundException::new);
             int idParam = studentToBeFindById.getId();
-            Student student = studentService.findById(idParam);
-            final String jsonTask = new ObjectMapper().writeValueAsString(student);
+            StudentDto studentDto = studentService.findById(idParam);
+            final String jsonTask = new ObjectMapper().writeValueAsString(studentDto);
             resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().write(jsonTask);
         } catch (StudentNotFoundException sNFE) {

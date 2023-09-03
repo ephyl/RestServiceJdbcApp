@@ -1,15 +1,10 @@
 package ephyl.dao;
 
-import ephyl.model.Course;
-import ephyl.model.Student;
-import ephyl.util.StudentUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CourseManagerDaoJdbc implements CourseManagerDao {
     private final Connection connection;

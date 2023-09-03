@@ -1,11 +1,8 @@
 package ephyl.dao;
 
-import ephyl.dto.CourseDto;
 import ephyl.model.Course;
 import ephyl.model.Gender;
 import ephyl.model.Student;
-import ephyl.util.mapper.CourseMapper;
-import org.mapstruct.factory.Mappers;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,18 +16,16 @@ public class StudentDaoJdbc implements StudentDao {
         this.connection = connection;
     }
 
-    private void getCourses(Student student, List<CourseDto> studentCoursesList, PreparedStatement preparedStatementGetCourses) throws SQLException {
+    private void getCourses(Student student, List<Course> studentCoursesList, PreparedStatement preparedStatementGetCourses) throws SQLException {
         ResultSet resultSetOfCourses = preparedStatementGetCourses.executeQuery();
-        CourseMapper mapper
-                = Mappers.getMapper(CourseMapper.class);
 
         while (resultSetOfCourses.next()) {
             Course course = new Course();
             course.setId(resultSetOfCourses.getInt("id"));
             course.setName(resultSetOfCourses.getString("name"));
-            studentCoursesList.add(mapper.sourceToDestination(course));
+            studentCoursesList.add(course);
         }
-        student.setCoursesDto(studentCoursesList);
+        student.setCourseList(studentCoursesList);
     }
 
     @Override
@@ -74,7 +69,7 @@ public class StudentDaoJdbc implements StudentDao {
     @Override
     public Optional<Student> findById(int id) {
         Student student = null;
-        List<CourseDto> studentCoursesList = new ArrayList<>();
+        List<Course> studentCoursesList = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Student WHERE id = ?");) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();

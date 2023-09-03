@@ -1,5 +1,8 @@
 package ephyl.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TeacherDto {
     private String name;
 

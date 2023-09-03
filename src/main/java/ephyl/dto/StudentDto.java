@@ -1,11 +1,26 @@
 package ephyl.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import ephyl.model.Course;
 import ephyl.model.Gender;
 
+import java.util.List;
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class StudentDto {
     private int id;
     private String name;
     private int age;
+    private Gender gender;
+
+    private List<CourseDto> coursesDtoList;
+
+    public List<CourseDto> getCoursesDtoList() {
+        return coursesDtoList;
+    }
+
+    public void setCoursesDtoList(List<CourseDto> coursesDtoList) {
+        this.coursesDtoList = coursesDtoList;
+    }
 
     public int getAge() {
         return age;
@@ -15,7 +30,7 @@ public class StudentDto {
         this.age = age;
     }
 
-    private Gender gender;
+
 
     public StudentDto(String name, int age, Gender gender) {
         this.name = name;

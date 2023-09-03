@@ -108,7 +108,7 @@ public class CourseDaoJdbc implements CourseDao {
     @Override
     public Optional<Course> findById(int id) {
         Course course = null;
-        List<StudentDto> studentsList = new ArrayList<>();
+        List<Student> studentsList = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM course WHERE id = ?");) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -131,7 +131,7 @@ public class CourseDaoJdbc implements CourseDao {
         return Optional.ofNullable(course);
     }
 
-    private void getStudents(Course course, List<StudentDto> studentList, PreparedStatement preparedStatementGetCourses) throws SQLException {
+    private void getStudents(Course course, List<Student> studentList, PreparedStatement preparedStatementGetCourses) throws SQLException {
         ResultSet resultSetOfCourses = preparedStatementGetCourses.executeQuery();
         StudentMapper mapper = Mappers.getMapper(StudentMapper.class);
         while (resultSetOfCourses.next()) {
@@ -140,7 +140,7 @@ public class CourseDaoJdbc implements CourseDao {
             student.setName(resultSetOfCourses.getString("name"));
             student.setAge(resultSetOfCourses.getInt("age"));
             student.setGender(Gender.valueOf(resultSetOfCourses.getString("gender")));
-            studentList.add(mapper.sourceToDestination(student));
+            studentList.add(student);
         }
         course.setStudents(studentList);
     }

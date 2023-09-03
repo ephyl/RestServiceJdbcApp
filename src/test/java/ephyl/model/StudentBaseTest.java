@@ -1,9 +1,5 @@
 package ephyl.model;
 
-import ephyl.dto.CourseDto;
-import ephyl.model.Course;
-import ephyl.model.Gender;
-import ephyl.model.Student;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,11 +16,11 @@ public class StudentBaseTest {
     @BeforeAll
     static void beforeAll() {
         newStudent = new Student("Mike", 20, Gender.MALE);
-        List<CourseDto> courseList = Mockito.mock(List.class);
+        List<Course> courseList = Mockito.mock(List.class);
         when(courseList.size()).thenReturn(2);
 
         newStudent.setId(4);
-        newStudent.setCoursesDto(courseList);
+        newStudent.setCourseList(courseList);
 
         studentToSetNameAgeGender =  new Student();
 
@@ -53,7 +49,7 @@ public class StudentBaseTest {
     }
     @Test
     void getStudentCourses() {
-        assertEquals(2, newStudent.getCoursesDto().size());
+        assertEquals(2, newStudent.getCourseList().size());
     }
     @Test
     void setNameToEmptyStudent() {

@@ -67,7 +67,7 @@ public class TeacherDaoJdbc implements TeacherDao {
         ResultSet resultSetOfCourses = preparedStatementGetCourses.executeQuery();
         while (resultSetOfCourses.next()) {
             Course course = new Course();
-            List<StudentDto> studentList = new ArrayList<>();
+            List<Student> studentList = new ArrayList<>();
             course.setId(resultSetOfCourses.getInt("id"));
             course.setName(resultSetOfCourses.getString("name"));
             course.setTeacher_id(resultSetOfCourses.getInt("teacher_id"));
@@ -81,16 +81,16 @@ public class TeacherDaoJdbc implements TeacherDao {
         teacher.setCourseList(teacherCoursesList);
     }
 
-    private void getStudents(Course course, List<StudentDto> studentList, PreparedStatement preparedStatementGetStudents) throws SQLException {
+    private void getStudents(Course course, List<Student> studentList, PreparedStatement preparedStatementGetStudents) throws SQLException {
         ResultSet resultSet = preparedStatementGetStudents.executeQuery();
-        StudentMapper mapper = Mappers.getMapper(StudentMapper.class);
+//        StudentMapper mapper = Mappers.getMapper(StudentMapper.class);
         while (resultSet.next()) {
             Student student = new Student();
             student.setId(resultSet.getInt("id"));
             student.setName(resultSet.getString("name"));
             student.setAge(resultSet.getInt("age"));
             student.setGender(Gender.valueOf(resultSet.getString("gender")));
-            studentList.add(mapper.sourceToDestination(student));
+            studentList.add(student);
         }
         course.setStudents(studentList);
     }
