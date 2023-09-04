@@ -5,6 +5,7 @@ import ephyl.model.Course;
 import ephyl.model.Gender;
 import ephyl.model.Student;
 import ephyl.model.Teacher;
+import ephyl.util.ConnectionManager;
 import ephyl.util.mapper.CourseMapper;
 import ephyl.util.mapper.StudentMapper;
 import org.mapstruct.factory.Mappers;
@@ -15,10 +16,13 @@ import java.util.List;
 import java.util.Optional;
 
 public class CourseDaoJdbc implements CourseDao {
-    private final Connection connection;
+    private Connection connection = ConnectionManager.getConnection();
 
     public CourseDaoJdbc(Connection connection) {
         this.connection = connection;
+    }
+
+    public CourseDaoJdbc() {
     }
 
     @Override

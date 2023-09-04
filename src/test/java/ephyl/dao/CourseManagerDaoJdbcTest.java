@@ -33,7 +33,8 @@ class CourseManagerDaoJdbcTest {
                 postgres.getUsername(),
                 postgres.getPassword()
         );
-        courseManagerDaoJdbc = new CourseManagerDaoJdbc(connection);
+        courseManagerDaoJdbc = new CourseManagerDaoJdbc();
+        courseManagerDaoJdbc.setConnection(connection);
         studentDaoJdbc = new StudentDaoJdbc(connection);
     }
 

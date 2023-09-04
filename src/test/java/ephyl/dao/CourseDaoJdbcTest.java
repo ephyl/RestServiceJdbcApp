@@ -1,5 +1,6 @@
 package ephyl.dao;
 
+
 import ephyl.util.ConnectionManager;
 import ephyl.model.Course;
 import org.junit.jupiter.api.AfterAll;
@@ -15,8 +16,11 @@ import java.sql.Connection;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+
+
 @Testcontainers
 class CourseDaoJdbcTest {
+
     @Container
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
             "postgres:15-alpine"
@@ -43,6 +47,7 @@ class CourseDaoJdbcTest {
     @Test
     void getAll() {
         assertEquals(4, courseDaoJdbc.getAll().size());
+        System.out.println(postgres.getExposedPorts());
     }
 
     @Test

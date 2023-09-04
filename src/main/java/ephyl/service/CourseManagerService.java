@@ -6,7 +6,7 @@ import ephyl.dao.CourseManagerDaoJdbc;
 import ephyl.util.StudentUtil;
 
 public class CourseManagerService {
-    private CourseManagerDao courseManagerDaoJdbc = new CourseManagerDaoJdbc(ConnectionManager.getConnection());
+    private CourseManagerDao courseManagerDaoJdbc = new CourseManagerDaoJdbc();
 
     public CourseManagerService(CourseManagerDao courseManagerDaoJdbc) {
         this.courseManagerDaoJdbc = courseManagerDaoJdbc;
