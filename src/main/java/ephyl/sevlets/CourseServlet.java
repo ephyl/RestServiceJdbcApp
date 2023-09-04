@@ -71,8 +71,7 @@ public class CourseServlet extends HttpServlet {
         boolean isUpdated = false;
         try {
             courseToBeUpdated = convertFromJson(req, courseToBeUpdated).orElseThrow(CourseNotFoundException::new);
-            CourseValidator courseValidator = new CourseValidator();
-            if (courseValidator.validate(courseToBeUpdated)) {
+            if (courseService.validate(courseToBeUpdated)) {
                 isUpdated = courseService.update(courseToBeUpdated);
                 final String jsonTask = new ObjectMapper().writeValueAsString(isUpdated);
                 resp.setContentType("application/json; charset=UTF-8");

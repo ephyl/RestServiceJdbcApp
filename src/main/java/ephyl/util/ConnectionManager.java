@@ -1,25 +1,27 @@
 package ephyl.util;
 
 import ephyl.util.PropertiesUtil;
+import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class ConnectionManager {
     private static final String URL_KEY = "db.url";
     private static final String USERNAME_KEY = "db.username";
     private static final String PASSWORD_KEY = "db.password";
 
-    private String url;
-    private String userName ;
-    private String password;
-
-
     public ConnectionManager() {
     }
+    public static Connection getConnection(Map<String, String> params){
+        return params != null ? getTestConnection(params.get("url"), params.get("username"),
+                params.get("password")) : getDBConnection();
+    }
 
-    public static Connection getConnection(String url, String userName, String password) {
+
+    public static Connection getTestConnection(String url, String userName, String password) {
         Connection connection;
         try {
             Class.forName("org.postgresql.Driver");
@@ -36,7 +38,7 @@ public class ConnectionManager {
         }
         return connection;
     }
-    public static Connection getConnection() {
+    public static Connection getDBConnection() {
         Connection connection;
         try {
             Class.forName("org.postgresql.Driver");

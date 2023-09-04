@@ -13,6 +13,8 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -34,13 +36,13 @@ class StudentDtoValidatorTest {
     @BeforeEach
     void setUp() {
         postgres.start();
+        Map <String, String> params = new HashMap<>();
+        params.put("url", postgres.getJdbcUrl());
+        params.put("username", postgres.getUsername());
+        params.put("password", postgres.getPassword());
 
-        Connection connection = ConnectionManager.getConnection(
-                postgres.getJdbcUrl(),
-                postgres.getUsername(),
-                postgres.getPassword()
-        );
-        studentDaoJdbc = new StudentDaoJdbc(connection);
+
+        studentDaoJdbc = new StudentDaoJdbc(params);
         student = Mockito.mock(StudentDto.class);
     }
 

@@ -78,6 +78,8 @@ class CourseServletTest {
         course1.setId(1);
         BufferedReader bufferedReader = new BufferedReader(new CharArrayReader(str.toCharArray()));
         when(request.getReader()).thenReturn(bufferedReader);
+        when(courseService.validate(course1)).thenReturn(true);
+
         when(request.getMethod()).thenReturn("PUT");
         when(response.getWriter()).thenReturn(printWriter);
 

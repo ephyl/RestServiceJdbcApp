@@ -8,6 +8,7 @@ import ephyl.model.Course;
 import ephyl.util.exception.CourseNotFoundException;
 import ephyl.util.mapper.CourseMapper;
 import ephyl.util.mapper.StudentMapper;
+import ephyl.util.validator.CourseValidator;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CourseService implements CourseCrudService {
-    private CourseDaoJdbc courseDaoJdbc = new CourseDaoJdbc(ConnectionManager.getConnection());
+    private CourseDaoJdbc courseDaoJdbc = new CourseDaoJdbc();
 
     public CourseService(CourseDaoJdbc courseDaoJdbc) {
         this.courseDaoJdbc = courseDaoJdbc;
@@ -42,7 +43,6 @@ public class CourseService implements CourseCrudService {
         }
 
         return courseDto;
-//        return courseOptional.orElseThrow(CourseNotFoundException::new);
     }
 
     public void delete(int id) {
@@ -55,6 +55,10 @@ public class CourseService implements CourseCrudService {
 
     public long addNew(Course course) {
         return courseDaoJdbc.addNew(course);
+    }
+    public boolean validate(Course course){
+    CourseValidator courseValidator = new CourseValidator();
+        return courseValidator.validate(course);
     }
 
 }

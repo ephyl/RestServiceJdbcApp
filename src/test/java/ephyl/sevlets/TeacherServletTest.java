@@ -75,7 +75,8 @@ class TeacherServletTest {
         BufferedReader bufferedReader = new BufferedReader(new CharArrayReader(str.toCharArray()));
         when(request.getReader()).thenReturn(bufferedReader);
         when(request.getMethod()).thenReturn("PUT");
-        when(teacherService.update(any(Teacher.class))).thenReturn(true);
+        when(teacherService.validate(teacher1)).thenReturn(true);
+        when(teacherService.update(teacher1)).thenReturn(true);
 
         when(response.getWriter()).thenReturn(printWriter);
 

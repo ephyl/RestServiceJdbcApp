@@ -12,6 +12,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,12 +37,12 @@ class TeacherDaoJdbcTest {
     void setUp() {
         postgres.start();
 
-        Connection connection = ConnectionManager.getConnection(
-                postgres.getJdbcUrl(),
-                postgres.getUsername(),
-                postgres.getPassword()
-        );
-        teacherDaoJdbc = new TeacherDaoJdbc(connection);
+        Map<String, String> params = new HashMap<>();
+        params.put("url", postgres.getJdbcUrl());
+        params.put("username", postgres.getUsername());
+        params.put("password", postgres.getPassword());
+
+        teacherDaoJdbc = new TeacherDaoJdbc(params);
     }
     @Test
     void getAll() {

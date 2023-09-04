@@ -5,7 +5,7 @@ import ephyl.dao.CourseDaoJdbc;
 import ephyl.model.Course;
 
 public class CourseValidator {
-    private  CourseDaoJdbc courseDaoJdbc = new CourseDaoJdbc(ConnectionManager.getConnection());
+    private  CourseDaoJdbc courseDaoJdbc = new CourseDaoJdbc();
 
     public CourseValidator(CourseDaoJdbc courseDaoJdbc) {
         this.courseDaoJdbc = courseDaoJdbc;

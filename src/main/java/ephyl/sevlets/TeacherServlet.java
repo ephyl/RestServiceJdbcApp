@@ -64,7 +64,7 @@ public class TeacherServlet extends HttpServlet {
         boolean isUpdated = false;
         try {
             tacherToBeUpdated = convertFromJson(req, tacherToBeUpdated).orElseThrow(TeacherNotFoundException::new);
-            if (TeacherValidator.validate(tacherToBeUpdated)) {
+            if (teacherService.validate(tacherToBeUpdated)) {
                 isUpdated = teacherService.update(tacherToBeUpdated);
                 final String jsonTask = new ObjectMapper().writeValueAsString(isUpdated);
                 resp.setContentType("application/json; charset=UTF-8");

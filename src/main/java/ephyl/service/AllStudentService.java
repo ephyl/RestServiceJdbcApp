@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AllStudentService {
-    private StudentDaoJdbc studentDaoJdbc = new StudentDaoJdbc(ConnectionManager.getConnection());
+    private StudentDaoJdbc studentDaoJdbc = new StudentDaoJdbc();
 
     public void setStudentDaoJdbc(StudentDaoJdbc studentDaoJdbc) {
         this.studentDaoJdbc = studentDaoJdbc;

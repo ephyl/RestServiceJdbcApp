@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class StudentService implements StudentCrudService {
-    private StudentDaoJdbc studentDaoJdbc = new StudentDaoJdbc(ConnectionManager.getConnection());
+    private StudentDaoJdbc studentDaoJdbc = new StudentDaoJdbc();
 
     public StudentService() {
     }

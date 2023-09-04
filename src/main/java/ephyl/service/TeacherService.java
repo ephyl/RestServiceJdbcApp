@@ -4,11 +4,12 @@ import ephyl.util.ConnectionManager;
 import ephyl.dao.TeacherDaoJdbc;
 import ephyl.model.Teacher;
 import ephyl.util.exception.TeacherNotFoundException;
+import ephyl.util.validator.TeacherValidator;
 
 import java.util.Optional;
 
 public class TeacherService implements CrudService<Teacher> {
-    private TeacherDaoJdbc teacherDaoJdbc = new TeacherDaoJdbc(ConnectionManager.getConnection());
+    private TeacherDaoJdbc teacherDaoJdbc = new TeacherDaoJdbc();
 
     public TeacherService(TeacherDaoJdbc teacherDaoJdbc) {
         this.teacherDaoJdbc = teacherDaoJdbc;
@@ -32,5 +33,10 @@ public class TeacherService implements CrudService<Teacher> {
 
     public long addNew(Teacher teacher) {
         return teacherDaoJdbc.addNew(teacher);
+    }
+
+    public boolean validate(Teacher teacher){
+        TeacherValidator teacherValidator =  new TeacherValidator(teacherDaoJdbc);
+        return teacherValidator.validate(teacher);
     }
 }

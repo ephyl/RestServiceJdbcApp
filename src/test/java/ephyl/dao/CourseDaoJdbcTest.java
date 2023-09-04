@@ -12,6 +12,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -36,12 +38,12 @@ class CourseDaoJdbcTest {
     void setUp() {
         postgres.start();
 
-        Connection connection = ConnectionManager.getConnection(
-                postgres.getJdbcUrl(),
-                postgres.getUsername(),
-                postgres.getPassword()
-        );
-        courseDaoJdbc = new CourseDaoJdbc(connection);
+        Map<String, String> params = new HashMap<>();
+        params.put("url", postgres.getJdbcUrl());
+        params.put("username", postgres.getUsername());
+        params.put("password", postgres.getPassword());
+
+        courseDaoJdbc = new CourseDaoJdbc(params);
     }
 
     @Test

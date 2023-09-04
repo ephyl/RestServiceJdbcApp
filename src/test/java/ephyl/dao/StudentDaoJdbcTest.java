@@ -2,6 +2,8 @@ package ephyl.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import ephyl.util.ConnectionManager;
@@ -35,12 +37,12 @@ public class StudentDaoJdbcTest {
     void setUp() {
         postgres.start();
 
-        Connection connection = ConnectionManager.getConnection(
-                postgres.getJdbcUrl(),
-                postgres.getUsername(),
-                postgres.getPassword()
-        );
-        studentDaoJdbc = new StudentDaoJdbc(connection);
+        Map<String, String> params = new HashMap<>();
+        params.put("url", postgres.getJdbcUrl());
+        params.put("username", postgres.getUsername());
+        params.put("password", postgres.getPassword());
+
+        studentDaoJdbc = new StudentDaoJdbc(params);
     }
 
     @Test
@@ -90,7 +92,7 @@ public class StudentDaoJdbcTest {
         studentToBeUpdated.setAge(66);
         studentToBeUpdated.setGender(Gender.X_GENDER);
 
-        assertTrue(studentDaoJdbc.update(studentToBeUpdated));
+       assertTrue(studentDaoJdbc.update(studentToBeUpdated));
         assertEquals("John Malkovich", studentDaoJdbc.findById(1).get().getName());
         assertEquals(66, studentDaoJdbc.findById(1).get().getAge());
         assertEquals("X_GENDER", studentDaoJdbc.findById(1).get().getGender().toString());

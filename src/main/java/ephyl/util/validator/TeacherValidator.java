@@ -5,14 +5,19 @@ import ephyl.dao.TeacherDaoJdbc;
 import ephyl.model.Teacher;
 
 public class TeacherValidator {
-    private static final TeacherDaoJdbc teacherDaoJdbc = new TeacherDaoJdbc(ConnectionManager.getConnection());
+    private TeacherDaoJdbc teacherDaoJdbc = new TeacherDaoJdbc();
 
-    public static boolean validate(Teacher teacher) {
-        if(teacher.getName() == null || teacher.getName().length()<=1) return false;
-        return isNameUnique(teacher);
+    public TeacherValidator() {
     }
-    private static boolean isNameUnique(Teacher teacher) {
+
+    public TeacherValidator(TeacherDaoJdbc teacherDaoJdbc) {
+        this.teacherDaoJdbc = teacherDaoJdbc;
+    }
+
+    public  boolean validate(Teacher teacher) {
+        if(teacher.getName() == null || teacher.getName().length()<=1) return false;
         return teacherDaoJdbc.isNameUnique(teacher);
     }
+
 
 }

@@ -7,7 +7,7 @@ import ephyl.model.Student;
 import ephyl.util.exception.NotUniqueNameException;
 
 public class StudentDtoValidator {
-    private StudentDaoJdbc studentDaoJdbc = new StudentDaoJdbc(ConnectionManager.getConnection());
+    private StudentDaoJdbc studentDaoJdbc = new StudentDaoJdbc();
 
     public StudentDtoValidator(StudentDaoJdbc studentDaoJdbc) {
         this.studentDaoJdbc = studentDaoJdbc;
